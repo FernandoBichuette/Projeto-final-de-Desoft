@@ -52,12 +52,20 @@ class Player(pygame.sprite.Sprite):
         self.rect.centerx = WIDTH / 2
         self.rect.bottom = HEIGHT - 10
         
+        self.speedx = 0
+        
+        self.radius = 25
+        
+        
+        
 pygame.init()
 pygame.mixer.init()
 
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 
 pygame.display.set_caption("TANQUE")
+
+
 
 
 
