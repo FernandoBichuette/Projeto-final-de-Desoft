@@ -56,7 +56,18 @@ class Player(pygame.sprite.Sprite):
         
         self.radius = 25
         
+    def update(self):
+        self.rect.x += self.speedx
         
+        if self.rect.right > WIDTH:
+            self.rect.right = WIDTH
+        if self.rect.left < 0:
+            self.rect.left = 0
+            
+        if self.rect.top > HEIGHT:
+            self.rect.top = HEIGHT
+        if self.rect.bottom < 0:
+            self.rect.bottom = 0
         
 pygame.init()
 pygame.mixer.init()
@@ -64,6 +75,8 @@ pygame.mixer.init()
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 
 pygame.display.set_caption("TANQUE")
+
+clock = pygame.time.Clock()
 
 
 
