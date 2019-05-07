@@ -57,6 +57,8 @@ class Tanque_purple(pygame.sprite.Sprite):
         
         self.radius = 25
         
+        
+        
     def update(self):
         self.rect.x += self.speedx
         self.rect.y += self.speedy
@@ -131,7 +133,6 @@ clock = pygame.time.Clock()
 try:
     
     # Loop principal.
-    pygame.mixer.music.play(loops=-1)
     running = True
     while running:
         
@@ -145,9 +146,11 @@ try:
             if event.type == pygame.QUIT:
                 running = False
             
-    
-
-
-
-
-
+            
+            if event.type == pygame.KEYDOWN:
+                
+                if event.key == pygame.KEY_LEFT:
+                    
+                    pygame.transform.rotate()
+            
+            
