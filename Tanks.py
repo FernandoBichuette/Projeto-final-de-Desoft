@@ -40,7 +40,7 @@ class Tanque_purple(pygame.sprite.Sprite):
         self.image = player_img
         
         # Diminuindo o tamanho da imagem.
-        self.image = pygame.transform.scale(player_img, (50, 38))
+        self.image = pygame.transform.scale(player_img, (100, 60))
         
         # Deixando transparente.
         self.image.set_colorkey(BLACK)
@@ -48,9 +48,10 @@ class Tanque_purple(pygame.sprite.Sprite):
         # Detalhes sobre o posicionamento.
         self.rect = self.image.get_rect()
         
+        
         # Centraliza embaixo da tela.
-        self.rect.x = random.randint(0, 430) 
-        self.rect.y = random.randint(0, 600)
+        self.rect.x = random.randint(0, 380) 
+        self.rect.y = random.randint(0, 400)
         
         self.speedx = 0
         self.speedy = 0
@@ -85,7 +86,7 @@ class Tanque_green(pygame.sprite.Sprite):
         self.image = player_img
         
         # Diminuindo o tamanho da imagem.
-        self.image = pygame.transform.scale(player_img, (50, 38))
+        self.image = pygame.transform.scale(player_img, (100, 60))
         
         # Deixando transparente.
         self.image.set_colorkey(BLACK)
@@ -131,6 +132,12 @@ background_rect = background.get_rect()
 
 clock = pygame.time.Clock()
 
+player1 = Tanque_purple()
+player2 = Tanque_green()
+# Cria um grupo de todos os sprites e adiciona a nave.
+all_sprites = pygame.sprite.Group()
+all_sprites.add(player1)
+all_sprites.add(player2)
 # Comando para evitar travamentos.
 try:
     
@@ -148,13 +155,17 @@ try:
             # Verifica se foi fechado.
             if event.type == pygame.QUIT:
                 running = False
-            
-    
-
-
+          # A cada loop, redesenha o fundo e os sprites
+        screen.fill(BLACK)
+        screen.blit(background, background_rect)
+        all_sprites.draw(screen)   
+        # Depois de desenhar tudo, inverte o display.
+        pygame.display.flip()
+        
 finally:
     
     pygame.quit()
+
 
 
 
