@@ -64,6 +64,8 @@ class Tanque_purple(pygame.sprite.Sprite):
         
         self.radius = 25
         
+        
+        
     def update(self):
         self.rect.x += self.speedx
         self.rect.y += self.speedy
@@ -130,8 +132,38 @@ class Tanque_green(pygame.sprite.Sprite):
         if self.rect.bottom < 0:
             self.rect.bottom = 0
             
-
+# Classe Bullet que representa os tiros
+class Bullet(pygame.sprite.Sprite):
+    
+    # Construtor da classe.
+    def __init__(self, x, y):
         
+        # Construtor da classe pai (Sprite).
+        pygame.sprite.Sprite.__init__(self)
+        
+        # Carregando a imagem de fundo.
+        bullet_img = pygame.image.load(path.join(img_dir, "laserRed16.png")).convert()
+        self.image = bullet_img
+        
+        # Deixando transparente.
+        self.image.set_colorkey(BLACK)
+        
+        # Detalhes sobre o posicionamento.
+        self.rect = self.image.get_rect()
+        
+        # Coloca no lugar inicial definido em x, y do constutor
+        self.rect.bottom = y
+        self.rect.centerx = x
+        self.speedy = -10
+
+    # Metodo que atualiza a posição da navinha
+    def update(self):
+        self.rect.y += self.speedy
+        
+        # Se o tiro passar do inicio da tela, morre.
+        if self.rect.bottom < 0:
+            self.kill()
+
 pygame.init()
 pygame.mixer.init()
 
@@ -155,7 +187,7 @@ all_sprites.add(player2)
 try:
     
     # Loop principal.
-    
+
     running = True
     while running:
         
