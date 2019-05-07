@@ -70,6 +70,53 @@ class Tanque_purple(pygame.sprite.Sprite):
             self.rect.top = HEIGHT
         if self.rect.bottom < 0:
             self.rect.bottom = 0
+    
+# Classe Jogador que representa a nave
+class Tanque_green(pygame.sprite.Sprite):
+    
+    # Construtor da classe.
+    def __init__(self):
+        
+        # Construtor da classe pai (Sprite).
+        pygame.sprite.Sprite.__init__(self)
+        
+        # Carregando a imagem de fundo.
+        player_img = pygame.image.load(path.join(img_dir, "Tank_green.png")).convert()
+        self.image = player_img
+        
+        # Diminuindo o tamanho da imagem.
+        self.image = pygame.transform.scale(player_img, (50, 38))
+        
+        # Deixando transparente.
+        self.image.set_colorkey(BLACK)
+        
+        # Detalhes sobre o posicionamento.
+        self.rect = self.image.get_rect()
+        
+        # Centraliza embaixo da tela.
+        self.rect.x = random.randint(0, 430) 
+        self.rect.y = random.randint(0, 600)
+        
+        self.speedx = 0
+        self.speedy = 0
+        
+        self.radius = 25
+        
+    def update(self):
+        self.rect.x += self.speedx
+        self.rect.y += self.speedy
+        
+        if self.rect.right > WIDTH:
+            self.rect.right = WIDTH
+        if self.rect.left < 0:
+            self.rect.left = 0
+            
+        if self.rect.top > HEIGHT:
+            self.rect.top = HEIGHT
+        if self.rect.bottom < 0:
+            self.rect.bottom = 0
+            
+
         
 pygame.init()
 pygame.mixer.init()
@@ -97,6 +144,8 @@ try:
             # Verifica se foi fechado.
             if event.type == pygame.QUIT:
                 running = False
+            
+    
 
 
 
