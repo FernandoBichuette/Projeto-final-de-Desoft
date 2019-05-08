@@ -12,6 +12,7 @@ import pygame
 import random
 import time
 from os import path
+import math
 
 img_dir = path.join(path.dirname(__file__), 'img')
 
@@ -41,7 +42,7 @@ class Tanque_purple(pygame.sprite.Sprite):
         
         
         # Diminuindo o tamanho da imagem.
-        self.image = pygame.transform.scale(player_img, (50, 38))
+        self.image = pygame.transform.scale(player_img, (100, 60))
         
         # Deixando transparente.
         self.image.set_colorkey(BLACK)
@@ -200,11 +201,11 @@ try:
             # Verifica se foi fechado.
             if event.type == pygame.QUIT:
                 running = False
-<<<<<<< HEAD
+
             
 
           # A cada loop, redesenha o fundo e os sprites
-=======
+
                 
             # Verifica se apertou alguma tecla.
             if event.type == pygame.KEYDOWN:
@@ -217,6 +218,11 @@ try:
                 if event.key == pygame.K_LEFT:
                    player1.velocidade_angular = -1
                    player1.direita = True   
+                   
+                if event.key == pygame.K_UP:
+                    player1.speedx = math.cos(player1.angulo)
+                    player1.speedy = math.sin(player1.angulo)
+                    
                    
             if event.type == pygame.KEYUP:
                 # Dependendo da tecla, altera a velocidade.
@@ -235,18 +241,13 @@ try:
         
         
         # A cada loop, redesenha o fundo e os sprites
->>>>>>> 6ca700791f6791656577e7916756d11a1432f86f
+
         screen.fill(BLACK)
         screen.blit(background, background_rect)
         all_sprites.draw(screen)   
         # Depois de desenhar tudo, inverte o display.
         pygame.display.flip()
-<<<<<<< HEAD
 
-
-=======
-        
->>>>>>> 6ca700791f6791656577e7916756d11a1432f86f
 finally:
     
     pygame.quit()
