@@ -142,8 +142,8 @@ class Bullet(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         
         # Carregando a imagem de fundo.
-        bullet_img = pygame.image.load(path.join(img_dir, "laserRed16.png")).convert()
-        self.image = bullet_img
+        Bullet_img = pygame.image.load(path.join(img_dir, "Bullet.png")).convert()
+        self.image = Bullet_img
         
         # Deixando transparente.
         self.image.set_colorkey(BLACK)
@@ -175,10 +175,6 @@ pygame.display.set_caption("TANQUE")
 background = pygame.image.load(path.join(img_dir, 'Tela_de_fundo.jpg')).convert()
 background_rect = background.get_rect()
 
-# Carrega o maze
-maze = pygame.image.load(path.join(img_dir, 'maze1.png')).convert()
-maze_rect= background.get_rect()
-
 clock = pygame.time.Clock()
 
 player1 = Tanque_purple()
@@ -204,6 +200,11 @@ try:
             # Verifica se foi fechado.
             if event.type == pygame.QUIT:
                 running = False
+
+            
+
+          # A cada loop, redesenha o fundo e os sprites
+
                 
             # Verifica se apertou alguma tecla.
             if event.type == pygame.KEYDOWN:
@@ -229,12 +230,23 @@ try:
                 
                 if event.key == pygame.K_LEFT:
                    player1.velocidade_angular = 0   
-
+               
+        
+        
+        
+        
+        
         all_sprites.update()
+        
+        
+        # A cada loop, redesenha o fundo e os sprites
+
         screen.fill(BLACK)
         screen.blit(background, background_rect)
         all_sprites.draw(screen)   
         # Depois de desenhar tudo, inverte o display.
         pygame.display.flip()
-finally:    
+
+finally:
+    
     pygame.quit()
