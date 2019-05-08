@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 """
 Created on Fri May  3 09:06:20 2019
-
 @author: Manu
 """
 
@@ -175,6 +174,10 @@ pygame.display.set_caption("TANQUE")
 background = pygame.image.load(path.join(img_dir, 'Tela_de_fundo.jpg')).convert()
 background_rect = background.get_rect()
 
+# Carrega o maze
+maze = pygame.image.load(path.join(img_dir, 'maze1.png')).convert()
+maze_rect= background.get_rect()
+
 clock = pygame.time.Clock()
 
 player1 = Tanque_purple()
@@ -200,11 +203,7 @@ try:
             # Verifica se foi fechado.
             if event.type == pygame.QUIT:
                 running = False
-<<<<<<< HEAD
-            
-
           # A cada loop, redesenha o fundo e os sprites
-=======
                 
             # Verifica se apertou alguma tecla.
             if event.type == pygame.KEYDOWN:
@@ -225,32 +224,14 @@ try:
                 
                 if event.key == pygame.K_LEFT:
                    player1.velocidade_angular = 0   
-               
-        
-        
-        
-        
-        
+
         all_sprites.update()
         
-        
         # A cada loop, redesenha o fundo e os sprites
->>>>>>> 6ca700791f6791656577e7916756d11a1432f86f
         screen.fill(BLACK)
         screen.blit(background, background_rect)
         all_sprites.draw(screen)   
         # Depois de desenhar tudo, inverte o display.
         pygame.display.flip()
-<<<<<<< HEAD
-
-
-=======
-        
->>>>>>> 6ca700791f6791656577e7916756d11a1432f86f
-finally:
-    
+finally:    
     pygame.quit()
-
-
-
-
