@@ -39,8 +39,9 @@ class Tanque_purple(pygame.sprite.Sprite):
         player_img = pygame.image.load(path.join(img_dir, "Tank_purple.png")).convert()
         self.image = player_img
         
+        
         # Diminuindo o tamanho da imagem.
-        self.image = pygame.transform.scale(player_img, (100, 60))
+        self.image = pygame.transform.scale(player_img, (50, 38))
         
         # Deixando transparente.
         self.image.set_colorkey(BLACK)
@@ -48,11 +49,16 @@ class Tanque_purple(pygame.sprite.Sprite):
         # Detalhes sobre o posicionamento.
         self.rect = self.image.get_rect()
         
+        #Rotação
+        
         
         # Centraliza embaixo da tela.
         self.rect.x = random.randint(0, 380) 
         self.rect.y = random.randint(0, 400)
-        
+        self.direita = False
+        self.img_referencia = self.image
+        self.velocidade_angular=0
+        self.angulo= 0
         self.speedx = 0
         self.speedy = 0
         
@@ -63,11 +69,18 @@ class Tanque_purple(pygame.sprite.Sprite):
     def update(self):
         self.rect.x += self.speedx
         self.rect.y += self.speedy
+        self.angulo += self.velocidade_angular
+        
+        
+        self.image=pygame.transform.rotate( self.img_referencia, self.angulo)
         
         if self.rect.right > WIDTH:
             self.rect.right = WIDTH
         if self.rect.left < 0:
             self.rect.left = 0
+        
+            
+            
             
         if self.rect.top > HEIGHT:
             self.rect.top = HEIGHT
@@ -119,8 +132,38 @@ class Tanque_green(pygame.sprite.Sprite):
         if self.rect.bottom < 0:
             self.rect.bottom = 0
             
-
+# Classe Bullet que representa os tiros
+class Bullet(pygame.sprite.Sprite):
+    
+    # Construtor da classe.
+    def __init__(self, x, y):
         
+        # Construtor da classe pai (Sprite).
+        pygame.sprite.Sprite.__init__(self)
+        
+        # Carregando a imagem de fundo.
+        bullet_img = pygame.image.load(path.join(img_dir, "laserRed16.png")).convert()
+        self.image = bullet_img
+        
+        # Deixando transparente.
+        self.image.set_colorkey(BLACK)
+        
+        # Detalhes sobre o posicionamento.
+        self.rect = self.image.get_rect()
+        
+        # Coloca no lugar inicial definido em x, y do constutor
+        self.rect.bottom = y
+        self.rect.centerx = x
+        self.speedy = -10
+
+    # Metodo que atualiza a posição da navinha
+    def update(self):
+        self.rect.y += self.speedy
+        
+        # Se o tiro passar do inicio da tela, morre.
+        if self.rect.bottom < 0:
+            self.kill()
+
 pygame.init()
 pygame.mixer.init()
 
@@ -157,16 +200,53 @@ try:
             # Verifica se foi fechado.
             if event.type == pygame.QUIT:
                 running = False
+<<<<<<< HEAD
             
 
           # A cada loop, redesenha o fundo e os sprites
+=======
+                
+            # Verifica se apertou alguma tecla.
+            if event.type == pygame.KEYDOWN:
+                # Dependendo da tecla, altera a velocidade.
+                 
+                if event.key == pygame.K_RIGHT:
+                   player1.velocidade_angular = 1
+                   player1.direita = True
+                   
+                if event.key == pygame.K_LEFT:
+                   player1.velocidade_angular = -1
+                   player1.direita = True   
+                   
+            if event.type == pygame.KEYUP:
+                # Dependendo da tecla, altera a velocidade.
+                if event.key == pygame.K_RIGHT:
+                   player1.velocidade_angular = 0
+                
+                if event.key == pygame.K_LEFT:
+                   player1.velocidade_angular = 0   
+               
+        
+        
+        
+        
+        
+        all_sprites.update()
+        
+        
+        # A cada loop, redesenha o fundo e os sprites
+>>>>>>> 6ca700791f6791656577e7916756d11a1432f86f
         screen.fill(BLACK)
         screen.blit(background, background_rect)
         all_sprites.draw(screen)   
         # Depois de desenhar tudo, inverte o display.
         pygame.display.flip()
+<<<<<<< HEAD
 
 
+=======
+        
+>>>>>>> 6ca700791f6791656577e7916756d11a1432f86f
 finally:
     
     pygame.quit()
