@@ -157,20 +157,16 @@ try:
             # Verifica se foi fechado.
             if event.type == pygame.QUIT:
                 running = False
-<<<<<<< HEAD
             
 
-
-
-=======
           # A cada loop, redesenha o fundo e os sprites
         screen.fill(BLACK)
         screen.blit(background, background_rect)
         all_sprites.draw(screen)   
         # Depois de desenhar tudo, inverte o display.
         pygame.display.flip()
-        
->>>>>>> 186889501f7aeb6e8e4c63a595adc600158d1114
+
+
 finally:
     
     pygame.quit()
