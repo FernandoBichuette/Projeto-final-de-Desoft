@@ -41,7 +41,7 @@ class Tanque_purple(pygame.sprite.Sprite):
         
         
         # Diminuindo o tamanho da imagem.
-        self.image = pygame.transform.scale(player_img, (50, 38))
+        self.image = pygame.transform.scale(player_img, (50, 47))
         
         # Deixando transparente.
         self.image.set_colorkey(BLACK)
@@ -49,7 +49,7 @@ class Tanque_purple(pygame.sprite.Sprite):
         # Detalhes sobre o posicionamento.
         self.rect = self.image.get_rect()
         
-        #Rotação
+        
         
         
         # Centraliza embaixo da tela.
@@ -101,7 +101,7 @@ class Tanque_green(pygame.sprite.Sprite):
         self.image = player_img
         
         # Diminuindo o tamanho da imagem.
-        self.image = pygame.transform.scale(player_img, (100, 60))
+        self.image = pygame.transform.scale(player_img, (50, 47))
         
         # Deixando transparente.
         self.image.set_colorkey(BLACK)
@@ -115,12 +115,17 @@ class Tanque_green(pygame.sprite.Sprite):
         
         self.speedx = 0
         self.speedy = 0
-        
+        self.img_referencia = self.image
+        self.velocidade_angular=0
+        self.angulo= 0
         self.radius = 25
         
     def update(self):
         self.rect.x += self.speedx
         self.rect.y += self.speedy
+        self.angulo += self.velocidade_angular
+        
+        self.image=pygame.transform.rotate( self.img_referencia, self.angulo)
         
         if self.rect.right > WIDTH:
             self.rect.right = WIDTH
@@ -206,12 +211,22 @@ try:
                 # Dependendo da tecla, altera a velocidade.
                  
                 if event.key == pygame.K_RIGHT:
-                   player1.velocidade_angular = 1
+                   player1.velocidade_angular = 1.
                    player1.direita = True
+                
+                if event.key == pygame.K_a:
+                    player2.velocidade_angular = 1
+                    player2.direita = True
+                
                    
                 if event.key == pygame.K_LEFT:
                    player1.velocidade_angular = -1
                    player1.direita = True   
+                
+                if event.key == pygame.K_d:
+                    player2.velocidade_angular = -1
+                    player2.direita = True
+                   
                    
             if event.type == pygame.KEYUP:
                 # Dependendo da tecla, altera a velocidade.
@@ -221,6 +236,11 @@ try:
                 if event.key == pygame.K_LEFT:
                    player1.velocidade_angular = 0   
                
+                if event.key == pygame.K_a:
+                    player2.velocidade_angular = 0
+                    
+                if event.key == pygame.K_d:
+                    player2.velocidade_angular = 0
         
         
         
