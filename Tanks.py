@@ -235,7 +235,7 @@ try:
                 # Dependendo da tecla, altera a velocidade.
                  
                 if event.key == pygame.K_RIGHT:
-                   player1.velocidade_angular = 1
+                   player1.velocidade_angular = -1
                    player1.direita = True
                 
                 if event.key == pygame.K_a:
@@ -244,7 +244,7 @@ try:
                 
                    
                 if event.key == pygame.K_LEFT:
-                   player1.velocidade_angular = -1
+                   player1.velocidade_angular = 1
                    player1.direita = True   
                 
                 if event.key == pygame.K_d:
