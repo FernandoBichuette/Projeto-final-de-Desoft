@@ -240,4 +240,8 @@ try:
 
 finally:
     
+<<<<<<< HEAD
     pygame.quit()
+=======
+    pygame.quit()
+>>>>>>> 2d0c995fbf7d79f8130f7b14b937f599e3da2586
