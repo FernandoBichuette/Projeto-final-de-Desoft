@@ -1,3 +1,10 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Fri May 10 10:36:45 2019
+
+@author: Fernando
+"""
+
 import pygame
 import random
 import time
@@ -6,8 +13,8 @@ import math
 
 img_dir = path.join(path.dirname(__file__), 'img')
 
-WIDTH = 1000
-HEIGHT = 900
+WIDTH = 480
+HEIGHT = 600
 FPS = 60
 
 WHITE = (255, 255, 255)
@@ -29,6 +36,8 @@ class Tanque_purple(pygame.sprite.Sprite):
         # Carregando a imagem de fundo.
         player_img = pygame.image.load(path.join(img_dir, "Tank_purple.png")).convert()
         self.image = player_img.copy()
+        
+        
         
         # Diminuindo o tamanho da imagem.
 
@@ -57,16 +66,19 @@ class Tanque_purple(pygame.sprite.Sprite):
         self.radius = 25
         
         
-       
-        
     def update(self):
-        
-        self.angulo += self.velocidade_angular
         self.angulo1 = self.angulo*(math.pi/180)
+        self.angulo += self.velocidade_angular
         self.speedx += math.sin((self.angulo1))*self.speed
         self.speedy += math.cos((self.angulo1))*self.speed
-        self.rect.centerx = self.speedx
-        self.rect.centery = self.speedy
+        self.rect.x = self.speedx
+        self.rect.y = self.speedy
+        
+        
+       
+
+        self.rect.centerx += self.speedx
+        self.rect.centery += self.speedy
         self.angulo += self.velocidade_angular
  
        
@@ -85,12 +97,6 @@ class Tanque_purple(pygame.sprite.Sprite):
             self.rect.top = HEIGHT
         if self.rect.bottom < 0:
             self.rect.bottom = 0
-            
-            
-            
-            
-            
-            
     
 # Classe Jogador que representa a nave
 class Tanque_green(pygame.sprite.Sprite):
@@ -253,10 +259,10 @@ try:
                    
                    
                 if event.key == pygame.K_UP:
-                    player1.speed = -1.5
+                    player1.speed = -1
                     
                 if event.key == pygame.K_DOWN:
-                    player1.speed = 1.5
+                    player1.speed = 1
                     
                 if event.key == pygame.K_w:
                     player2.speed = -1
@@ -315,4 +321,3 @@ try:
 finally:
     
     pygame.quit()
-
