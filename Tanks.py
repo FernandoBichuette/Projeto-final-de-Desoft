@@ -28,7 +28,8 @@ class Tanque_purple(pygame.sprite.Sprite):
         
         # Carregando a imagem de fundo.
         player_img = pygame.image.load(path.join(img_dir, "Tank_purple.png")).convert()
-        self.image = player_img
+        self.image = player_img.copy()
+        
         
         
         # Diminuindo o tamanho da imagem.
@@ -41,40 +42,39 @@ class Tanque_purple(pygame.sprite.Sprite):
         
         # Detalhes sobre o posicionamento.
         self.rect = self.image.get_rect()
-        
-        
-        
-        
+                       
         # Centraliza embaixo da tela.
         self.rect.x = random.randint(0, 380) 
         self.rect.y = random.randint(0, 400)
         self.direita = False
         self.img_referencia = self.image
-        self.velocidade_angular=0
+        
+        #Velocidades
+        self.velocidade_angular = 0              
         self.angulo= 0
         self.speedx = 0
-        self.speedy = 0
-        
+        self.speedy = 0        
         self.radius = 25
         
         
-        
     def update(self):
-        self.rect.x += self.speedx
-        self.rect.y += self.speedy
+        self.rect.centerx += self.speedx
+        self.rect.centery += self.speedy
         self.angulo += self.velocidade_angular
-        
-        
+ 
+       
+        #Rotação
+        loc = self.rect.center       
         self.image=pygame.transform.rotate( self.img_referencia, self.angulo)
-        
+        self.rect = self.image.get_rect()
+        self.rect.center=loc
+
+    
         if self.rect.right > WIDTH:
             self.rect.right = WIDTH
         if self.rect.left < 0:
             self.rect.left = 0
-        
-            
-            
-            
+                                           
         if self.rect.top > HEIGHT:
             self.rect.top = HEIGHT
         if self.rect.bottom < 0:
@@ -103,13 +103,14 @@ class Tanque_green(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         
         # Centraliza embaixo da tela.
-        self.rect.x = random.randint(0, 430) 
-        self.rect.y = random.randint(0, 600)
+        self.rect.x = random.randint(0, 380) 
+        self.rect.y = random.randint(0, 400)
         
+        #Velocidades
         self.speedx = 0
         self.speedy = 0
         self.img_referencia = self.image
-        self.velocidade_angular=0
+        self.velocidade_angular = 0
         self.angulo= 0
         self.radius = 25
         
@@ -118,7 +119,11 @@ class Tanque_green(pygame.sprite.Sprite):
         self.rect.y += self.speedy
         self.angulo += self.velocidade_angular
         
+        #Rotação
+        loc = self.rect.center
         self.image=pygame.transform.rotate( self.img_referencia, self.angulo)
+        self.rect = self.image.get_rect()
+        self.rect.center=loc
         
         if self.rect.right > WIDTH:
             self.rect.right = WIDTH
@@ -202,6 +207,8 @@ try:
             
 
           # A cada loop, redesenha o fundo e os sprites
+          
+          
 
                 
             # Verifica se apertou alguma tecla.
