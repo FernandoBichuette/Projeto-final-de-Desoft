@@ -1,12 +1,3 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Fri May  3 09:06:20 2019
-@author: Manu
-"""
-
-#Alunos: Fernando Bichuette Assumpção, Manuel Castanares, Felipe Lacombe
-
 import pygame
 import random
 import time
