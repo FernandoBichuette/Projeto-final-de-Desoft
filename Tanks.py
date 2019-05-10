@@ -21,15 +21,14 @@ YELLOW = (255, 255, 0)
 class Tanque_purple(pygame.sprite.Sprite):
     
     # Construtor da classe.
-    def __init__(self):
+    def _init_(self):
         
         # Construtor da classe pai (Sprite).
-        pygame.sprite.Sprite.__init__(self)
+        pygame.sprite.Sprite._init_(self)
         
         # Carregando a imagem de fundo.
         player_img = pygame.image.load(path.join(img_dir, "Tank_purple.png")).convert()
-        self.image = player_img.copy()
-        
+        self.image = player_img
         
         
         # Diminuindo o tamanho da imagem.
@@ -42,39 +41,43 @@ class Tanque_purple(pygame.sprite.Sprite):
         
         # Detalhes sobre o posicionamento.
         self.rect = self.image.get_rect()
-                       
+        
+        
+        
+        
         # Centraliza embaixo da tela.
         self.rect.x = random.randint(0, 380) 
         self.rect.y = random.randint(0, 400)
         self.direita = False
         self.img_referencia = self.image
-        
-        #Velocidades
-        self.velocidade_angular = 0              
+        self.velocidade_angular=0
         self.angulo= 0
         self.speedx = 0
-        self.speedy = 0        
+        self.speedy = 0
+        
         self.radius = 25
         
         
+        
     def update(self):
-        self.rect.centerx += self.speedx
-        self.rect.centery += self.speedy
+        self.rect.x += self.speedx
+        self.rect.y += self.speedy
         self.angulo += self.velocidade_angular
- 
-       
-        #Rotação
+        
+        
         loc = self.rect.center       
         self.image=pygame.transform.rotate( self.img_referencia, self.angulo)
         self.rect = self.image.get_rect()
         self.rect.center=loc
-
-    
+        
         if self.rect.right > WIDTH:
             self.rect.right = WIDTH
         if self.rect.left < 0:
             self.rect.left = 0
-                                           
+        
+            
+            
+            
         if self.rect.top > HEIGHT:
             self.rect.top = HEIGHT
         if self.rect.bottom < 0:
@@ -84,10 +87,10 @@ class Tanque_purple(pygame.sprite.Sprite):
 class Tanque_green(pygame.sprite.Sprite):
     
     # Construtor da classe.
-    def __init__(self):
+    def _init_(self):
         
         # Construtor da classe pai (Sprite).
-        pygame.sprite.Sprite.__init__(self)
+        pygame.sprite.Sprite._init_(self)
         
         # Carregando a imagem de fundo.
         player_img = pygame.image.load(path.join(img_dir, "Tank_green.png")).convert()
@@ -103,14 +106,13 @@ class Tanque_green(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         
         # Centraliza embaixo da tela.
-        self.rect.x = random.randint(0, 380) 
-        self.rect.y = random.randint(0, 400)
+        self.rect.x = random.randint(0, 430) 
+        self.rect.y = random.randint(0, 600)
         
-        #Velocidades
         self.speedx = 0
         self.speedy = 0
         self.img_referencia = self.image
-        self.velocidade_angular = 0
+        self.velocidade_angular=0
         self.angulo= 0
         self.radius = 25
         
@@ -119,8 +121,7 @@ class Tanque_green(pygame.sprite.Sprite):
         self.rect.y += self.speedy
         self.angulo += self.velocidade_angular
         
-        #Rotação
-        loc = self.rect.center
+        loc = self.rect.center       
         self.image=pygame.transform.rotate( self.img_referencia, self.angulo)
         self.rect = self.image.get_rect()
         self.rect.center=loc
@@ -139,10 +140,10 @@ class Tanque_green(pygame.sprite.Sprite):
 class Bullet(pygame.sprite.Sprite):
     
     # Construtor da classe.
-    def __init__(self, x, y):
+    def _init_(self, x, y):
         
         # Construtor da classe pai (Sprite).
-        pygame.sprite.Sprite.__init__(self)
+        pygame.sprite.Sprite._init_(self)
         
         # Carregando a imagem de fundo.
         Bullet_img = pygame.image.load(path.join(img_dir, "Bullet.png")).convert()
@@ -155,17 +156,14 @@ class Bullet(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         
         # Coloca no lugar inicial definido em x, y do constutor
-        self.rect.bottom = y
-        self.rect.centerx = x
+        self.rect.bottom = x 
+        self.rect.centerx = y
         self.speedy = -10
-
+        
     # Metodo que atualiza a posição da navinha
     def update(self):
         self.rect.y += self.speedy
-        
-        # Se o tiro passar do inicio da tela, morre.
-        if self.rect.bottom < 0:
-            self.kill()
+
 
 pygame.init()
 pygame.mixer.init()
@@ -182,12 +180,13 @@ clock = pygame.time.Clock()
 
 player1 = Tanque_purple()
 player2 = Tanque_green()
-bullet = Bullet()
+
 # Cria um grupo de todos os sprites e adiciona a nave.
 all_sprites = pygame.sprite.Group()
+bullets = pygame.sprite.Group()
 all_sprites.add(player1)
 all_sprites.add(player2)
-all_sprites.add(bullet)
+
 # Comando para evitar travamentos.
 try:
     
@@ -209,8 +208,6 @@ try:
             
 
           # A cada loop, redesenha o fundo e os sprites
-          
-          
 
                 
             # Verifica se apertou alguma tecla.
@@ -240,9 +237,12 @@ try:
                     player1.speedy = math.sin(player1.angulo)
                     
                 if event.key == pygame.K_SPACE:
-                        bullet = Bullet(player1.rect.centerx, player1.rect.top, pygame.image.load(path.join(img_dir, "Bullet.png")).convert())
-                        all_sprites.add(bullet)
-                        bullet.add(bullet)
+                        bullet = Bullet(player1.rect.centerx, player1.rect.top)
+                        bullets.add(bullet)
+                        all_sprites.add(bullets)
+                        
+                        
+                    
                    
             if event.type == pygame.KEYUP:
                 # Dependendo da tecla, altera a velocidade.
@@ -251,9 +251,6 @@ try:
                 
                 if event.key == pygame.K_LEFT:
                    player1.velocidade_angular = 0   
-<<<<<<< HEAD
-            
-=======
                
                 if event.key == pygame.K_a:
                     player2.velocidade_angular = 0
@@ -264,7 +261,6 @@ try:
         
         
         
->>>>>>> refs/remotes/origin/master
         
         all_sprites.update()
         
@@ -280,7 +276,3 @@ try:
 finally:
     
     pygame.quit()
-<<<<<<< HEAD
-=======
-
->>>>>>> refs/remotes/origin/master
