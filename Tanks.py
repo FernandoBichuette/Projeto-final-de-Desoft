@@ -52,7 +52,7 @@ class Tanque_purple(pygame.sprite.Sprite):
         self.angulo= 0
         self.speedx = 0
         self.speedy = 0
-        
+        self.diagonal = False
         self.radius = 25
         
         
@@ -63,7 +63,8 @@ class Tanque_purple(pygame.sprite.Sprite):
         self.angulo += self.velocidade_angular
         
         
-        self.image=pygame.transform.rotate( self.img_referencia, self.angulo)
+        self.image = pygame.transform.rotate( self.img_referencia, self.angulo)
+
         
         if self.rect.right > WIDTH:
             self.rect.right = WIDTH
@@ -210,6 +211,7 @@ try:
                    player1.direita = True   
                    
                 if event.key == pygame.K_UP:
+                    player1.diagonal = True
                     player1.speedx = math.cos(player1.angulo)
                     player1.speedy = math.sin(player1.angulo)
                     
@@ -220,7 +222,11 @@ try:
                    player1.velocidade_angular = 0
                 
                 if event.key == pygame.K_LEFT:
-                   player1.velocidade_angular = 0   
+                   player1.velocidade_angular = 0  
+                   
+                if event.key == pygame.K_UP:
+                    player1.speedx = 0
+                    player1.speedy = 0
                
         
         
@@ -229,7 +235,7 @@ try:
         
         all_sprites.update()
         
-        
+        screen.blit(player1.image, [player1.rect.x, player1.rect.y])
         # A cada loop, redesenha o fundo e os sprites
 
         screen.fill(BLACK)
@@ -240,8 +246,4 @@ try:
 
 finally:
     
-<<<<<<< HEAD
     pygame.quit()
-=======
-    pygame.quit()
->>>>>>> 2d0c995fbf7d79f8130f7b14b937f599e3da2586
