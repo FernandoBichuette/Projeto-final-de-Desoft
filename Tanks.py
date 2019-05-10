@@ -170,10 +170,12 @@ clock = pygame.time.Clock()
 
 player1 = Tanque_purple()
 player2 = Tanque_green()
+bullet = Bullet()
 # Cria um grupo de todos os sprites e adiciona a nave.
 all_sprites = pygame.sprite.Group()
 all_sprites.add(player1)
 all_sprites.add(player2)
+all_sprites.add(bullet)
 # Comando para evitar travamentos.
 try:
     
@@ -213,6 +215,10 @@ try:
                     player1.speedx = math.cos(player1.angulo)
                     player1.speedy = math.sin(player1.angulo)
                     
+                if event.key == pygame.K_SPACE:
+                        bullet = Bullet(player1.rect.centerx, player1.rect.top, pygame.image.load(path.join(img_dir, "Bullet.png")).convert())
+                        all_sprites.add(bullet)
+                        bullet.add(bullet)
                    
             if event.type == pygame.KEYUP:
                 # Dependendo da tecla, altera a velocidade.
@@ -221,11 +227,7 @@ try:
                 
                 if event.key == pygame.K_LEFT:
                    player1.velocidade_angular = 0   
-               
-        
-        
-        
-        
+            
         
         all_sprites.update()
         
@@ -240,8 +242,4 @@ try:
 
 finally:
     
-<<<<<<< HEAD
     pygame.quit()
-=======
-    pygame.quit()
->>>>>>> 2d0c995fbf7d79f8130f7b14b937f599e3da2586
