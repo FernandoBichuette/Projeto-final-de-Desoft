@@ -32,7 +32,9 @@ class Tanque_purple(pygame.sprite.Sprite):
         
         
         # Diminuindo o tamanho da imagem.
-        self.image = pygame.transform.scale(player_img, (100, 60))
+
+        self.image = pygame.transform.scale(player_img, (50, 47))
+
         
         # Deixando transparente.
         self.image.set_colorkey(BLACK)
@@ -40,7 +42,7 @@ class Tanque_purple(pygame.sprite.Sprite):
         # Detalhes sobre o posicionamento.
         self.rect = self.image.get_rect()
         
-        #Rotação
+        
         
         
         # Centraliza embaixo da tela.
@@ -51,6 +53,7 @@ class Tanque_purple(pygame.sprite.Sprite):
         self.velocidade_angular=0
         self.angulo= 0
         self.speedx = 0
+        self.speed = 0
         self.speedy = 0
         self.diagonal = False
         self.radius = 25
@@ -58,9 +61,12 @@ class Tanque_purple(pygame.sprite.Sprite):
         
         
     def update(self):
-        self.rect.x += self.speedx
-        self.rect.y += self.speedy
+        self.angulo1 = self.angulo*(math.pi/180)
         self.angulo += self.velocidade_angular
+        self.speedx += math.sin((self.angulo1))*self.speed
+        self.speedy += math.cos((self.angulo1))*self.speed
+        self.rect.x = self.speedx
+        self.rect.y = self.speedy
         
         
         self.image = pygame.transform.rotate( self.img_referencia, self.angulo)
@@ -93,7 +99,7 @@ class Tanque_green(pygame.sprite.Sprite):
         self.image = player_img
         
         # Diminuindo o tamanho da imagem.
-        self.image = pygame.transform.scale(player_img, (100, 60))
+        self.image = pygame.transform.scale(player_img, (50, 47))
         
         # Deixando transparente.
         self.image.set_colorkey(BLACK)
@@ -106,13 +112,23 @@ class Tanque_green(pygame.sprite.Sprite):
         self.rect.y = random.randint(0, 600)
         
         self.speedx = 0
+        self.speed = 0
         self.speedy = 0
-        
+        self.img_referencia = self.image
+        self.velocidade_angular=0
+        self.angulo= 0
         self.radius = 25
         
     def update(self):
-        self.rect.x += self.speedx
-        self.rect.y += self.speedy
+        self.angulo += self.velocidade_angular
+        self.angulo1 = self.angulo*(math.pi/180)
+        self.speedx += math.sin((self.angulo1))*self.speed
+        self.speedy += math.cos((self.angulo1))*self.speed
+        self.rect.x = self.speedx
+        self.rect.y = self.speedy
+        
+        
+        self.image=pygame.transform.rotate( self.img_referencia, self.angulo)
         
         if self.rect.right > WIDTH:
             self.rect.right = WIDTH
@@ -125,36 +141,36 @@ class Tanque_green(pygame.sprite.Sprite):
             self.rect.bottom = 0
             
 # Classe Bullet que representa os tiros
-class Bullet(pygame.sprite.Sprite):
+#class Bullet(pygame.sprite.Sprite):
     
     # Construtor da classe.
-    def __init__(self, x, y):
+    #def __init__(self, x, y):
         
         # Construtor da classe pai (Sprite).
-        pygame.sprite.Sprite.__init__(self)
+        #pygame.sprite.Sprite.__init__(self)
         
         # Carregando a imagem de fundo.
-        Bullet_img = pygame.image.load(path.join(img_dir, "Bullet.png")).convert()
-        self.image = Bullet_img
+        #Bullet_img = pygame.image.load(path.join(img_dir, "Bullet.png")).convert()
+        #self.image = Bullet_img
         
         # Deixando transparente.
-        self.image.set_colorkey(BLACK)
+        #self.image.set_colorkey(BLACK)
         
         # Detalhes sobre o posicionamento.
-        self.rect = self.image.get_rect()
+        #self.rect = self.image.get_rect()
         
         # Coloca no lugar inicial definido em x, y do constutor
-        self.rect.bottom = y
-        self.rect.centerx = x
-        self.speedy = -10
+        #self.rect.bottom = y
+        #self.rect.centerx = x
+        #self.speedy = -10
 
     # Metodo que atualiza a posição da navinha
-    def update(self):
-        self.rect.y += self.speedy
+    #def update(self):
+        #self.rect.y += self.speedy
         
         # Se o tiro passar do inicio da tela, morre.
-        if self.rect.bottom < 0:
-            self.kill()
+        #if self.rect.bottom < 0:
+         #   self.kill()
 
 pygame.init()
 pygame.mixer.init()
@@ -171,10 +187,12 @@ clock = pygame.time.Clock()
 
 player1 = Tanque_purple()
 player2 = Tanque_green()
+#bullet = Bullet()
 # Cria um grupo de todos os sprites e adiciona a nave.
 all_sprites = pygame.sprite.Group()
 all_sprites.add(player1)
 all_sprites.add(player2)
+#all_sprites.add(bullet)
 # Comando para evitar travamentos.
 try:
     
@@ -205,16 +223,37 @@ try:
                 if event.key == pygame.K_RIGHT:
                    player1.velocidade_angular = 1
                    player1.direita = True
+                
+                if event.key == pygame.K_a:
+                    player2.velocidade_angular = 1
+                    player2.direita = True
+                
                    
                 if event.key == pygame.K_LEFT:
                    player1.velocidade_angular = -1
                    player1.direita = True   
+                
+                if event.key == pygame.K_d:
+                    player2.velocidade_angular = -1
+                    player2.direita = True
+                   
                    
                 if event.key == pygame.K_UP:
-                    player1.diagonal = True
-                    player1.speedx = math.cos(player1.angulo)
-                    player1.speedy = math.sin(player1.angulo)
+                    player1.speed = -1
                     
+                if event.key == pygame.K_DOWN:
+                    player1.speed = 1
+                    
+                if event.key == pygame.K_w:
+                    player2.speed = -1
+                     
+                if event.key == pygame.K_s:
+                    player2.speed = 1
+                    
+               # if event.key == pygame.K_SPACE:
+                        #bullet = Bullet(player1.rect.centerx, player1.rect.top, pygame.image.load(path.join(img_dir, "Bullet.png")).convert())
+                        #all_sprites.add(bullet)
+                        #bullet.add(bullet)
                    
             if event.type == pygame.KEYUP:
                 # Dependendo da tecla, altera a velocidade.
@@ -225,17 +264,32 @@ try:
                    player1.velocidade_angular = 0  
                    
                 if event.key == pygame.K_UP:
-                    player1.speedx = 0
-                    player1.speedy = 0
+                    player1.velocidade_angular = 0
+                    player1.speed = 0 
+                
+                if event.key == pygame.K_DOWN:
+                    player1.velocidade_angular = 0
+                    player1.speed = 0
+                    
+                if event.key == pygame.K_w:
+                    player2.velocidade_angular = 0
+                    player2.speed = 0
+                    
+                if event.key == pygame.K_s:
+                    player2.velocidade_angular = 0
+                    player2.speed = 0
+
                
-        
-        
+                if event.key == pygame.K_a:
+                    player2.velocidade_angular = 0
+                    
+                if event.key == pygame.K_d:
+                    player2.velocidade_angular = 0
         
         
         
         all_sprites.update()
-        
-        screen.blit(player1.image, [player1.rect.x, player1.rect.y])
+
         # A cada loop, redesenha o fundo e os sprites
 
         screen.fill(BLACK)
@@ -247,3 +301,4 @@ try:
 finally:
     
     pygame.quit()
+
