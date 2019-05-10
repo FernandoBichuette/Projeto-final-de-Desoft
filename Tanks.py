@@ -1,17 +1,8 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Fri May  3 09:06:20 2019
-
-@author: Manu
-"""
-
-#Alunos: Fernando Bichuette Assumpção, Manuel Castanares, Felipe Lacombe
-
 import pygame
 import random
 import time
 from os import path
+import math
 
 img_dir = path.join(path.dirname(__file__), 'img')
 
@@ -41,7 +32,9 @@ class Tanque_purple(pygame.sprite.Sprite):
         
         
         # Diminuindo o tamanho da imagem.
+
         self.image = pygame.transform.scale(player_img, (50, 47))
+
         
         # Deixando transparente.
         self.image.set_colorkey(BLACK)
@@ -147,8 +140,8 @@ class Bullet(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         
         # Carregando a imagem de fundo.
-        bullet_img = pygame.image.load(path.join(img_dir, "laserRed16.png")).convert()
-        self.image = bullet_img
+        Bullet_img = pygame.image.load(path.join(img_dir, "Bullet.png")).convert()
+        self.image = Bullet_img
         
         # Deixando transparente.
         self.image.set_colorkey(BLACK)
@@ -205,6 +198,11 @@ try:
             # Verifica se foi fechado.
             if event.type == pygame.QUIT:
                 running = False
+
+            
+
+          # A cada loop, redesenha o fundo e os sprites
+
                 
             # Verifica se apertou alguma tecla.
             if event.type == pygame.KEYDOWN:
@@ -228,6 +226,11 @@ try:
                     player2.direita = True
                    
                    
+                if event.key == pygame.K_UP:
+                    player1.speedx = math.cos(player1.angulo)
+                    player1.speedy = math.sin(player1.angulo)
+                    
+                   
             if event.type == pygame.KEYUP:
                 # Dependendo da tecla, altera a velocidade.
                 if event.key == pygame.K_RIGHT:
@@ -250,16 +253,14 @@ try:
         
         
         # A cada loop, redesenha o fundo e os sprites
+
         screen.fill(BLACK)
         screen.blit(background, background_rect)
         all_sprites.draw(screen)   
         # Depois de desenhar tudo, inverte o display.
         pygame.display.flip()
-        
+
 finally:
     
     pygame.quit()
-
-
-
 
