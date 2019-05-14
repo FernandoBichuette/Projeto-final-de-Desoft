@@ -132,8 +132,11 @@ class Tanque_green(pygame.sprite.Sprite):
         self.angulo1 = self.angulo*(math.pi/180)
         self.speedx += math.sin((self.angulo1))*self.speed
         self.speedy += math.cos((self.angulo1))*self.speed
-        self.rect.x = self.speedx
-        self.rect.y = self.speedy
+        self.rect.centerx = self.speedx
+        self.rect.centery = self.speedy
+        self.angulo += self.velocidade_angular
+        
+        
         
         
         #Rotação
