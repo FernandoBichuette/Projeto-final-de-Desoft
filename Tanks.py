@@ -262,10 +262,10 @@ try:
                     player1.speed = 1.5
                     
                 if event.key == pygame.K_w:
-                    player2.speed = -1
+                    player2.speed = -1.5
                      
                 if event.key == pygame.K_s:
-                    player2.speed = 1
+                    player2.speed = 1.5
                     
                # if event.key == pygame.K_SPACE:
                         #bullet = Bullet(player1.rect.centerx, player1.rect.top, pygame.image.load(path.join(img_dir, "Bullet.png")).convert())
