@@ -159,7 +159,7 @@ class Tanque_green(pygame.sprite.Sprite):
 class Bullet(pygame.sprite.Sprite):
     
     # Construtor da classe.
-    def __init__(self, x, y):
+    def __init__(self, x, y, angulo):
         
         # Construtor da classe pai (Sprite).
         pygame.sprite.Sprite.__init__(self)
@@ -177,11 +177,15 @@ class Bullet(pygame.sprite.Sprite):
         # Coloca no lugar inicial definido em x, y do constutor
         self.rect.centery = y
         self.rect.centerx = x
-        self.speedy = -10
-        
+        self.speed = -5
+        self.vx = math.sin(angulo)*self.speed
+        self.vy = math.cos(angulo)*self.speed
     # Metodo que atualiza a posição da navinha
     def update(self):
-        self.rect.y += self.speedy
+        
+        self.rect.centery += self.vy
+        self.rect.centerx += self.vx
+        
         
         # Se o tiro passar do inicio da tela, morre.
         #if self.rect.bottom < 0:
@@ -269,7 +273,7 @@ try:
                     player2.speed = 1.5
                     
                 if event.key == pygame.K_SPACE:
-                        bullet = Bullet(player1.rect.centerx, player1.rect.centery)
+                        bullet = Bullet(player1.rect.centerx, player1.rect.top, player1.angulo1)
                         bullets.add(bullet)
                         all_sprites.add(bullets)
                    
