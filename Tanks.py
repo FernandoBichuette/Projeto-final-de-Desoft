@@ -62,7 +62,7 @@ class Tanque_purple(pygame.sprite.Sprite):
     def update(self):
         
         self.angulo += self.velocidade_angular
-        self.angulo1 = math.radians(self.angulo*math.pi/180)
+        self.angulo1 = math.radians(self.angulo)
         self.speedx = math.sin((self.angulo1))*self.speed
         self.speedy = math.cos((self.angulo1))*self.speed
         self.rect.centerx += self.speedx
@@ -129,7 +129,7 @@ class Tanque_green(pygame.sprite.Sprite):
         
     def update(self):
         self.angulo += self.velocidade_angular
-        self.angulo1 = math.radians(self.angulo*math.pi/180)
+        self.angulo1 = math.radians(self.angulo)
         self.speedx = math.sin((self.angulo1))*self.speed
         self.speedy = math.cos((self.angulo1))*self.speed
         self.rect.centerx += self.speedx
@@ -272,10 +272,15 @@ try:
                     player2.speed = 1.5
                     
                 if event.key == pygame.K_SPACE:
-                        bullet = Bullet(player1.rect.centerx, player1.rect.centery, player1.angulo1)
-                        bullets.add(bullet)
-                        all_sprites.add(bullets)
+                    bullet = Bullet(player1.rect.centerx, player1.rect.centery, player1.angulo1)
+                    bullets.add(bullet)
+                    all_sprites.add(bullets)
                    
+                if event.key == pygame.K_q:
+                    bullet = Bullet(player2.rect.centerx, player2.rect.centery, player2.angulo1)
+                    bullets.add(bullet)
+                    all_sprites.add(bullets)
+                    
             if event.type == pygame.KEYUP:
                 # Dependendo da tecla, altera a velocidade.
                 if event.key == pygame.K_RIGHT:
