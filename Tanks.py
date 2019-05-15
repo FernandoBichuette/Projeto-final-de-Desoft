@@ -60,7 +60,6 @@ class Tanque_purple(pygame.sprite.Sprite):
        
         
     def update(self):
-        
         self.angulo += self.velocidade_angular
         self.angulo1 = math.radians(self.angulo)
         self.speedx = math.sin((self.angulo1))*self.speed
@@ -85,8 +84,6 @@ class Tanque_purple(pygame.sprite.Sprite):
             self.rect.top = HEIGHT
         if self.rect.bottom < 0:
             self.rect.bottom = 0
-            
-            
             
             
             
@@ -311,7 +308,6 @@ try:
                     
                 if event.key == pygame.K_d:
                     player2.velocidade_angular = 0
-        
         
         
         all_sprites.update()
