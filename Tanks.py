@@ -168,6 +168,8 @@ class Bullet(pygame.sprite.Sprite):
         Bullet_img = pygame.image.load(path.join(img_dir, "Bullet.png")).convert()
         self.image = Bullet_img
         
+        #Tamanho do bullet
+        self.image = pygame.transform.scale(Bullet_img, (10, 10))
         # Deixando transparente.
         self.image.set_colorkey(BLACK)
         
@@ -273,7 +275,7 @@ try:
                     player2.speed = 1.5
                     
                 if event.key == pygame.K_SPACE:
-                        bullet = Bullet(player1.rect.centerx, player1.rect.top, player1.angulo1)
+                        bullet = Bullet(player1.rect.centerx, player1.rect.centery, player1.angulo1)
                         bullets.add(bullet)
                         all_sprites.add(bullets)
                    
