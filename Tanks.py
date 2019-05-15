@@ -62,12 +62,12 @@ class Tanque_purple(pygame.sprite.Sprite):
     def update(self):
         
         self.angulo += self.velocidade_angular
-        self.angulo1 = self.angulo*(math.pi/180)
-        self.speedx += math.sin((self.angulo1))*self.speed
-        self.speedy += math.cos((self.angulo1))*self.speed
-        self.rect.centerx = self.speedx
-        self.rect.centery = self.speedy
-        self.angulo += self.velocidade_angular
+        self.angulo1 = math.radians(self.angulo*math.pi/180)
+        self.speedx = math.sin((self.angulo1))*self.speed
+        self.speedy = math.cos((self.angulo1))*self.speed
+        self.rect.centerx += self.speedx
+        self.rect.centery += self.speedy
+        
  
        
         #Rotação
@@ -129,16 +129,13 @@ class Tanque_green(pygame.sprite.Sprite):
         
     def update(self):
         self.angulo += self.velocidade_angular
-        self.angulo1 = self.angulo*(math.pi/180)
-        self.speedx += math.sin((self.angulo1))*self.speed
-        self.speedy += math.cos((self.angulo1))*self.speed
-        self.rect.centerx = self.speedx
-        self.rect.centery = self.speedy
-        self.angulo += self.velocidade_angular
+        self.angulo1 = math.radians(self.angulo*math.pi/180)
+        self.speedx = math.sin((self.angulo1))*self.speed
+        self.speedy = math.cos((self.angulo1))*self.speed
+        self.rect.centerx += self.speedx
+        self.rect.centery += self.speedy
         
-        
-        
-        
+    
         #Rotação
         loc = self.rect.center
         self.image=pygame.transform.rotate( self.img_referencia, self.angulo)
