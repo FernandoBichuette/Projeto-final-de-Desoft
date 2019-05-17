@@ -306,6 +306,7 @@ try:
                     player2.velocidade_angular = 0
         
         
+        
         all_sprites.update()
 
         # A cada loop, redesenha o fundo e os sprites
