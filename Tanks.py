@@ -18,28 +18,30 @@ BLUE = (0, 0, 255)
 YELLOW = (255, 255, 0)
 
 # Classe Jogador que representa a nave
-class Tanque_purple(pygame.sprite.Sprite):
+class Tanque(pygame.sprite.Sprite):
     
     # Construtor da classe.
-    def __init__(self):
+    def __init__(self,img):
         
         # Construtor da classe pai (Sprite).
         pygame.sprite.Sprite.__init__(self)
         
         # Carregando a imagem de fundo.
-        player_img = pygame.image.load(path.join(img_dir, "Tank_purple.png")).convert()
-        self.image = player_img.copy()
+        img =pygame.image.load(path.join(img_dir, img)).convert()
         
         # Diminuindo o tamanho da imagem.
-
-        self.image = pygame.transform.scale(player_img, (50, 47))
-
+        self.image = img
+        self.image = pygame.transform.scale(img,(50, 47))
         
+        
+
         # Deixando transparente.
         self.image.set_colorkey(BLACK)
         
+        
         # Detalhes sobre o posicionamento.
         self.rect = self.image.get_rect()
+        
                        
         # Centraliza embaixo da tela.
         self.direita = False
@@ -87,72 +89,14 @@ class Tanque_purple(pygame.sprite.Sprite):
             
             
     
-# Classe Jogador que representa a nave
-class Tanque_green(pygame.sprite.Sprite):
-    
-    # Construtor da classe.
-    def __init__(self):
-        
-        # Construtor da classe pai (Sprite).
-        pygame.sprite.Sprite.__init__(self)
-        
-        # Carregando a imagem de fundo.
-        player_img = pygame.image.load(path.join(img_dir, "Tank_green.png")).convert()
-        self.image = player_img
-        
-        # Diminuindo o tamanho da imagem.
-        self.image = pygame.transform.scale(player_img, (50, 47))
-        
-        # Deixando transparente.
-        self.image.set_colorkey(BLACK)
-        
-        # Detalhes sobre o posicionamento.
-        self.rect = self.image.get_rect()
-        
-        # Centraliza embaixo da tela.
-        self.rect.x = random.randint(0, 380) 
-        self.rect.y = random.randint(0, 400)
-        
-        #Velocidades
-        self.speedx = 0
-        self.speed = 0
-        self.speedy = 0
-        self.img_referencia = self.image
-        self.velocidade_angular = 0
-        self.angulo= 0
-        self.radius = 25
-        
-    def update(self):
-        self.angulo += self.velocidade_angular
-        self.angulo1 = math.radians(self.angulo)
-        self.speedx = math.sin((self.angulo1))*self.speed
-        self.speedy = math.cos((self.angulo1))*self.speed
-        self.rect.centerx += self.speedx
-        self.rect.centery += self.speedy
-        
-    
-        #Rotação
-        loc = self.rect.center
-        self.image=pygame.transform.rotate( self.img_referencia, self.angulo)
-        self.rect = self.image.get_rect()
-        self.rect.center=loc
-        
-        if self.rect.right > WIDTH:
-            self.rect.right = WIDTH
-        if self.rect.left < 0:
-            self.rect.left = 0
-            
-        if self.rect.top > HEIGHT:
-            self.rect.top = HEIGHT
-        if self.rect.bottom < 0:
-            self.rect.bottom = 0
+
             
 # Classe Bullet que representa os tiros
 class Bullet(pygame.sprite.Sprite):
     
     # Construtor da classe.
     def __init__(self, x, y, angulo):
-        
+    
         # Construtor da classe pai (Sprite).
         pygame.sprite.Sprite.__init__(self)
         
@@ -198,8 +142,8 @@ background_rect = background.get_rect()
 
 clock = pygame.time.Clock()
 
-player1 = Tanque_purple()
-player2 = Tanque_green()
+player1 = Tanque('Tank_purple.png')
+player2 = Tanque('Tank_green.png')
 #bullet = Bullet()
 # Cria um grupo de todos os sprites e adiciona a nave.
 all_sprites = pygame.sprite.Group()
