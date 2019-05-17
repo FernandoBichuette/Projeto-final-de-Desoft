@@ -50,9 +50,9 @@ class Tanque(pygame.sprite.Sprite):
         #Velocidades
         self.velocidade_angular = 0              
         self.angulo= 0
-        self.x = random.randint(0, 1000) 
+        self.x = random.randint(0, 500) 
         self.speed = 0
-        self.y = random.randint(0, 900)
+        self.y = random.randint(0, 200)
         self.diagonal = False       
         self.radius = 25
         
@@ -148,8 +148,10 @@ player2 = Tanque('Tank_green.png')
 # Cria um grupo de todos os sprites e adiciona a nave.
 all_sprites = pygame.sprite.Group()
 bullets = pygame.sprite.Group()
-all_sprites.add(player1)
-all_sprites.add(player2)
+Tanques_grupo = pygame.sprite.Group()
+Tanques_grupo.add(player1)
+Tanques_grupo.add(player2)
+all_sprites.add(Tanques_grupo)
 #all_sprites.add(bullet)
 # Comando para evitar travamentos.
 try:
@@ -252,7 +254,10 @@ try:
         
         
         all_sprites.update()
-
+        
+        hits = pygame.sprite.groupcollide(Tanques_grupo, bullets, True, False)
+        
+        
         # A cada loop, redesenha o fundo e os sprites
 
         screen.fill(BLACK)
