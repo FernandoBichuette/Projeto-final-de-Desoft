@@ -33,7 +33,6 @@ class Tanque(pygame.sprite.Sprite):
         self.image = img
         self.image = pygame.transform.scale(img,(50, 47))
         
-        
 
         # Deixando transparente.
         self.image.set_colorkey(BLACK)
@@ -214,6 +213,7 @@ try:
                     bullet = Bullet(player1.rect.centerx, player1.rect.centery, player1.angulo1)
                     bullets.add(bullet)
                     all_sprites.add(bullets)
+                 
                    
                 if event.key == pygame.K_q:
                     bullet = Bullet(player2.rect.centerx, player2.rect.centery, player2.angulo1)
