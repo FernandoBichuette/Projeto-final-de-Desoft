@@ -237,19 +237,17 @@ try:
                     player1.speed -= 1.5
                     
                 if event.key == pygame.K_w:
-                    player2.velocidade_angular = 0
-                    player2.speed = 0
+                    player2.speed += 1.5
                     
                 if event.key == pygame.K_s:
-                    player2.velocidade_angular = 0
-                    player2.speed = 0
+                    player2.speed -= 1.5
 
                
                 if event.key == pygame.K_a:
-                    player2.velocidade_angular = 0
+                    player2.velocidade_angular -= 1
                     
                 if event.key == pygame.K_d:
-                    player2.velocidade_angular = 0
+                    player2.velocidade_angular += 1
         
         
         
