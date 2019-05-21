@@ -186,7 +186,7 @@ try:
                    player1.direita = True
                 
                 if event.key == pygame.K_a:
-                    player2.velocidade_angular = 1
+                    player2.velocidade_angular += 1
                     player2.direita = True
                 
                    
@@ -195,7 +195,7 @@ try:
                    player1.direita = True   
                 
                 if event.key == pygame.K_d:
-                    player2.velocidade_angular = -1
+                    player2.velocidade_angular -= 1
                     player2.direita = True
                    
                    
@@ -206,10 +206,10 @@ try:
                     player1.speed += 1.5
                     
                 if event.key == pygame.K_w:
-                    player2.speed = -1.5
+                    player2.speed -= 1.5
                      
                 if event.key == pygame.K_s:
-                    player2.speed = 1.5
+                    player2.speed += 1.5
                     
                 if event.key == pygame.K_SPACE:
                     bullet = Bullet(player1.rect.centerx, player1.rect.centery, player1.angulo1)
@@ -237,19 +237,17 @@ try:
                     player1.speed -= 1.5
                     
                 if event.key == pygame.K_w:
-                    player2.velocidade_angular = 0
-                    player2.speed = 0
+                    player2.speed += 1.5
                     
                 if event.key == pygame.K_s:
-                    player2.velocidade_angular = 0
-                    player2.speed = 0
+                    player2.speed -= 1.5
 
                
                 if event.key == pygame.K_a:
-                    player2.velocidade_angular = 0
+                    player2.velocidade_angular -= 1
                     
                 if event.key == pygame.K_d:
-                    player2.velocidade_angular = 0
+                    player2.velocidade_angular += 1
         
         
         
