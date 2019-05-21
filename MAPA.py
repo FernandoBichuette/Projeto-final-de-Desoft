@@ -6,8 +6,8 @@ img_dir = path.join(path.dirname(__file__), 'img')
 
 # Dados gerais do jogo.
 TITULO = 'Joguinho'
-WIDTH = 600 # Largura da tela
-HEIGHT = 600 # Altura da tela
+WIDTH = 1000 # Largura da tela
+HEIGHT = 1000 # Altura da tela
 TILE_SIZE = 40 # Tamanho de cada tile (cada tile é um quadrado)
 PLAYER_WIDTH = TILE_SIZE
 PLAYER_HEIGHT = int(TILE_SIZE * 1.0)
@@ -43,15 +43,7 @@ MAP = [
     [BLOCK, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, BLOCK,],
     [BLOCK, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, BLOCK,],
     [BLOCK, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, BLOCK,],
-    [BLOCK, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, BLOCK,],
-    [BLOCK, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, BLOCK,],
-    [BLOCK, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, BLOCK,],
-    [BLOCK, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, BLOCK,],
-    [BLOCK, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, BLOCK,],
-    [BLOCK, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, BLOCK,],
-    [BLOCK, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, BLOCK,],
-    [BLOCK, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, BLOCK,],
-    [BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK,],
+
 ]
 
 # Class que representa os blocos do cenário
@@ -77,7 +69,6 @@ class Tile(pygame.sprite.Sprite):
 # Carrega todos os assets de uma vez.
 def load_assets(img_dir):
     assets = {}
-    assets[PLAYER_IMG] = pygame.image.load(path.join(img_dir, 'Tank_green.png')).convert_alpha()
     assets[BLOCK] = pygame.image.load(path.join(img_dir, 'BLOCK.png')).convert()
     assets[EMPTY] = pygame.image.load(path.join(img_dir, 'EMPTY.png')).convert()
     return assets
@@ -143,11 +134,6 @@ screen = pygame.display.set_mode((WIDTH, HEIGHT))
 # Nome do jogo
 pygame.display.set_caption(TITULO)
 
-# Imprime instruções
-print('*' * len(TITULO))
-print(TITULO.upper())
-print('*' * len(TITULO))
-print('Utilize as setas do teclado para andar e pular.')
 
 # Comando para evitar travamentos.
 try:
