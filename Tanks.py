@@ -112,8 +112,8 @@ class Bullet(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         
         # Coloca no lugar inicial definido em x, y do constutor
-        self.rect.centery = y
-        self.rect.centerx = x
+        self.rect.centery = y - math.cos(angulo)* 49
+        self.rect.centerx = x - math.sin(angulo)* 49
         self.speed = -5
         self.vx = math.sin(angulo)*self.speed
         self.vy = math.cos(angulo)*self.speed
@@ -255,8 +255,10 @@ try:
         
         all_sprites.update()
         
-        hits = pygame.sprite.groupcollide(Tanques_grupo, bullets, True, False)
+        hit1 = pygame.sprite.groupcollide(Tanques_grupo, bullets, True , False)       
         
+      
+            
         
         # A cada loop, redesenha o fundo e os sprites
 
