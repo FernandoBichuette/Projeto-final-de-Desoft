@@ -126,11 +126,13 @@ class Bullet(pygame.sprite.Sprite):
         
         if self.rect.top < 0:
             self.vy *= -1
-        if self.rect. bottom  > HEIGHT:
+        if self.rect.bottom  > HEIGHT:
             self.vy *= -1
             
-        
-        
+        if self.rect.right < 0:
+            self.vx *= -1
+        if self.rect.left  > WIDTH:
+            self.vx *= -1
         
         # Se o tiro passar do inicio da tela, morre.
         #if self.rect.bottom < 0:
