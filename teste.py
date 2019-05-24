@@ -321,3 +321,19 @@ try:
 finally:
     
     pygame.quit()
+    
+    if self.rect.right > WIDTH:
+            self.rect.right = WIDTH
+        if self.rect.left < 0:
+            self.rect.left = 0
+            
+        if self.rect.top < 0:
+            self.rect.top = 0 
+        if self.rect.bottom > 900:
+            self.rect.bottom = 900
+
+
+if self.rect.top < 0:
+            self.dy *= -1
+        if self.rect. bottom  > HEIGHT:
+            self.dy *= -1
