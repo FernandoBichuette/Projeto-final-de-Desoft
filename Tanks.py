@@ -43,7 +43,8 @@ class Tanque(pygame.sprite.Sprite):
         # Detalhes sobre o posicionamento.
         self.rect = self.image.get_rect()
         
-                       
+        self.mask = pygame.mask.from_surface(self.image)
+               
         # Centraliza embaixo da tela.
         self.direita = False
         self.img_referencia = self.image
@@ -87,24 +88,8 @@ class Tanque(pygame.sprite.Sprite):
             self.rect.bottom = 900
             
             
-        collisions = pygame.sprite.spritecollide(self, self.player, False)   
-        for collision in collisions:
-            # Estava indo para baixo
-            if self.speedy > 0:
-                self.rect.bottom = collision.rect.top
-                # Se colidiu com algo, para de cair
-                self.speedy = 0
-                # Atualiza o estado para parado
-                self.state = STILL
-            # Estava indo para cima
-            elif self.speedy < 0:
-                self.rect.top = collision.rect.bottom
-                # Se colidiu com algo, para de cair
-                self.speedy = 0
-                # Atualiza o estado para parado
-                self.state = STILL    
-    
-
+          
+        
             
 # Classe Bullet que representa os tiros
 class Bullet(pygame.sprite.Sprite):
@@ -173,11 +158,10 @@ player2 = Tanque('Tank_green.png')
 # Cria um grupo de todos os sprites e adiciona a nave.
 all_sprites = pygame.sprite.Group()
 bullets = pygame.sprite.Group()
-Tanques_grupo = pygame.sprite.Group()
-Tanques_grupo.add(player1)
-Tanques_grupo.add(player2)
-all_sprites.add(Tanques_grupo)
-#all_sprites.add(bullet)
+Tanques1 = pygame.sprite.Group(player1)
+Tanques2 = pygame.sprite.Group(player2)
+
+all_sprites.add(Tanques1,Tanques2)
 # Comando para evitar travamentos.
 try:
     
@@ -280,9 +264,13 @@ try:
         
         all_sprites.update()
         
-        hit1 = pygame.sprite.groupcollide(Tanques_grupo, bullets, True , False)       
+        colisao_1= pygame.sprite.groupcollide(Tanques1, bullets, True , False)       
+        colisao_2 = pygame.sprite.groupcollide(Tanques2, bullets, True , False)       
+
         
         
+        collisions = pygame.sprite.groupcollide(Tanques1,Tanques2, True ,False, pygame.sprite.collide_mask)
+
       
             
         
