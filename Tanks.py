@@ -79,10 +79,10 @@ class Tanque(pygame.sprite.Sprite):
         if self.rect.left < 0:
             self.rect.left = 0
                                            
-        if self.rect.top > HEIGHT:
-            self.rect.top = HEIGHT
-        if self.rect.bottom < 0:
-            self.rect.bottom = 0
+        if self.rect.top < 0:
+            self.rect.top = 0 
+        if self.rect.bottom > 900:
+            self.rect.bottom = 900
             
             
             
@@ -117,11 +117,23 @@ class Bullet(pygame.sprite.Sprite):
         self.speed = -5
         self.vx = math.sin(angulo)*self.speed
         self.vy = math.cos(angulo)*self.speed
-    # Metodo que atualiza a posição da navinha
+    # Update bala
     def update(self):
         
         self.rect.centery += self.vy
         self.rect.centerx += self.vx
+        
+        
+            
+        if self.rect.right > WIDTH:
+            self.rect.right = WIDTH
+        if self.rect.left < 0:
+            self.rect.left = 0
+            
+        if self.rect.top < 0:
+            self.rect.top = 0 
+        if self.rect.bottom > 900:
+            self.rect.bottom = 900
         
         
         # Se o tiro passar do inicio da tela, morre.
