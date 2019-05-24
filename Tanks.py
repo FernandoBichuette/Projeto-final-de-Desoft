@@ -9,6 +9,7 @@ img_dir = path.join(path.dirname(__file__), 'img')
 WIDTH = 1000
 HEIGHT = 900
 FPS = 100
+STILL = 0
 
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
@@ -33,10 +34,11 @@ class Tanque(pygame.sprite.Sprite):
         self.image = img
         self.image = pygame.transform.scale(img,(50, 47))
         
+        self.player = img
 
         # Deixando transparente.
         self.image.set_colorkey(BLACK)
-        
+    
         
         # Detalhes sobre o posicionamento.
         self.rect = self.image.get_rect()
@@ -56,7 +58,7 @@ class Tanque(pygame.sprite.Sprite):
         self.radius = 25
         
         
-       
+        
         
     def update(self):
         self.angulo += self.velocidade_angular
@@ -85,8 +87,22 @@ class Tanque(pygame.sprite.Sprite):
             self.rect.bottom = 0
             
             
-            
-            
+        collisions = pygame.sprite.spritecollide(self, self.player, False)   
+        for collision in collisions:
+            # Estava indo para baixo
+            if self.speedy > 0:
+                self.rect.bottom = collision.rect.top
+                # Se colidiu com algo, para de cair
+                self.speedy = 0
+                # Atualiza o estado para parado
+                self.state = STILL
+            # Estava indo para cima
+            elif self.speedy < 0:
+                self.rect.top = collision.rect.bottom
+                # Se colidiu com algo, para de cair
+                self.speedy = 0
+                # Atualiza o estado para parado
+                self.state = STILL    
     
 
             
@@ -212,6 +228,7 @@ try:
                     player2.speed += 1.5
                     
                 if event.key == pygame.K_SPACE:
+                    
                     bullet = Bullet(player1.rect.centerx, player1.rect.centery, player1.angulo1)
                     bullets.add(bullet)
                     all_sprites.add(bullets)
@@ -254,6 +271,7 @@ try:
         all_sprites.update()
         
         hit1 = pygame.sprite.groupcollide(Tanques_grupo, bullets, True , False)       
+        
         
       
             
