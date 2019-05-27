@@ -16,7 +16,7 @@ img_dir = path.join(path.dirname(__file__), 'img')
 fnt_dir = path.join(path.dirname(__file__), 'font')
 
 WIDTH = 600
-HEIGHT = 550
+HEIGHT = 650
 TILE_SIZE = 25
 FPS = 130
 
@@ -219,7 +219,7 @@ class Bullet(pygame.sprite.Sprite):
         self.angulo = angulo
         
         #Tamanho do bullet
-        self.image = pygame.transform.scale(Bullet_img, (5, 5))
+        self.image = pygame.transform.scale(Bullet_img, (8, 8))
         # Deixando transparente.
         self.image.set_colorkey(BLACK)
         
