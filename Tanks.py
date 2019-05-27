@@ -158,8 +158,10 @@ player2 = Tanque('Tank_green.png')
 # Cria um grupo de todos os sprites e adiciona a nave.
 all_sprites = pygame.sprite.Group()
 bullets = pygame.sprite.Group()
-Tanques1 = pygame.sprite.Group(player1)
-Tanques2 = pygame.sprite.Group(player2)
+Tanques1 = pygame.sprite.Group()
+Tanques2 = pygame.sprite.Group()
+Tanques1.add(player1)
+Tanques2.add(player2)
 
 all_sprites.add(Tanques1,Tanques2)
 # Comando para evitar travamentos.
@@ -264,11 +266,19 @@ try:
         
         all_sprites.update()
         
-        colisao_1= pygame.sprite.groupcollide(Tanques1, bullets, True , False)       
+        colisao_1= pygame.sprite.groupcollide(Tanques1, bullets, True , False)
+        for collision in colisao_1:
+            player1.kill()
+            player1 = Tanque('Tank_purple.png')
+            all_sprites.add(player1)
+            Tanques1.add(player1)
         colisao_2 = pygame.sprite.groupcollide(Tanques2, bullets, True , False)       
-
-        
-        
+        for collision in colisao_2:
+            player2.kill()
+            player2 = Tanque('Tank_green.png')
+            all_sprites.add(player2)
+            Tanques2.add(player2)
+            
         collisions = pygame.sprite.groupcollide(Tanques1,Tanques2, True ,False, pygame.sprite.collide_mask)
 
       
