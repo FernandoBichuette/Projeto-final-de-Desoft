@@ -189,13 +189,13 @@ class Tanque(pygame.sprite.Sprite):
                 self.rect.top = collide.rect.bottom
         
         
-        if self.rect.left > WIDTH:
-            self.rect.left = WIDTH
-        if self.rect.right < 0:
-            self.rect.right = 0
+        if self.rect.left > WIDTH - 20:
+            self.rect.left = WIDTH - 20
+        if self.rect.right < 20:
+            self.rect.right = 20
                                            
-        if self.rect.bottom > HEIGHT:
-            self.rect.bottom = HEIGHT
+        if self.rect.bottom > HEIGHT - 60:
+            self.rect.bottom = HEIGHT - 60
         if self.rect.top < 0:
             self.rect.top = 0
                 
@@ -251,7 +251,7 @@ class Bullet(pygame.sprite.Sprite):
         
         if self.rect.top < 0:
             self.vy *= -1
-        if self.rect.bottom  > HEIGHT:
+        if self.rect.bottom  > HEIGHT - 60:
             self.vy *= -1
             
         if self.rect.right < 0:
