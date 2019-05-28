@@ -109,7 +109,7 @@ def load_assets(img_dir):
 class Tanque(pygame.sprite.Sprite):
     
     # Construtor da classe.
-    def __init__(self, img, blocks):
+    def __init__(self, img, blocks,other_Tanks):
         
         # Construtor da classe pai (Sprite).
         pygame.sprite.Sprite.__init__(self)
@@ -123,7 +123,7 @@ class Tanque(pygame.sprite.Sprite):
         
         self.blocks = blocks
         
-
+        self.other_Tanks = other_Tanks
         # Deixando transparente.
         self.image.set_colorkey(BLACK)
         
@@ -144,7 +144,7 @@ class Tanque(pygame.sprite.Sprite):
         self.radius = 25
         
         
-       
+        self.mask = pygame.mask.from_surface(self.image)
         
     def update(self):
         
@@ -161,7 +161,7 @@ class Tanque(pygame.sprite.Sprite):
         self.rect.centerx += vx
         
         collisions = pygame.sprite.spritecollide(self, self.blocks, False)
-        
+        collisions +=  pygame.sprite.spritecollide(self, self.other_Tanks, False,pygame.sprite.collide_mask)
         for collision in collisions:
             if self.rect.centerx < collision.rect.centerx:
                 self.rect.right = collision.rect.left
@@ -173,6 +173,7 @@ class Tanque(pygame.sprite.Sprite):
         self.rect.centery += vy
         
         collisions = pygame.sprite.spritecollide(self, self.blocks, False)
+        collisions +=  pygame.sprite.spritecollide(self, self.other_Tanks, False,pygame.sprite.collide_mask)
         
         for collide in collisions:
             if self.rect.centery < collide.rect.centery:
@@ -191,7 +192,7 @@ class Tanque(pygame.sprite.Sprite):
         if self.rect.top < 0:
             self.rect.top = 0
                 
-                
+   
                 
 # Classe Bullet que representa os tiros
 class Bullet(pygame.sprite.Sprite):
@@ -282,15 +283,15 @@ blocks = pygame.sprite.Group()
 tiles = pygame.sprite.Group()
 
 score_font = assets["score_font"]
+Tanques1 = pygame.sprite.Group()
+Tanques2 = pygame.sprite.Group()
         
-player1 = Tanque('Tank_purple.png', blocks)
-player2 = Tanque('Tank_green.png', blocks)
+player1 = Tanque('Tank_purple.png', blocks,Tanques2)
+player2 = Tanque('Tank_green.png', blocks,Tanques1)
 #bullet = Bullet()
 # Cria um grupo de todos os sprites e adiciona a nave.
 all_sprites = pygame.sprite.Group()
 bullets = pygame.sprite.Group()
-Tanques1 = pygame.sprite.Group()
-Tanques2 = pygame.sprite.Group()
 Tanques1.add(player1)
 Tanques2.add(player2)
 
@@ -419,6 +420,15 @@ try:
             all_sprites.add(player2)
             Tanques2.add(player2)
             lives_p2 -= 1
+        
+
+        
+        colisao = pygame.sprite.groupcollide(Tanques1, Tanques2, False , pygame.sprite.collide_mask)
+        
+        
+        
+        
+        
         
         all_sprites.update()
         
