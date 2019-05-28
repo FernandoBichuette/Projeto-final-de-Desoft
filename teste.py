@@ -240,15 +240,19 @@ class Bullet(pygame.sprite.Sprite):
         
         collisions = pygame.sprite.spritecollide(self, self.blocks, False)
         for collision in collisions:
-            self.vy = int(math.cos(self.angulo*-1)*self.speed)*(-1)
+                self.vy *= -1
+        
+        self.rect.centery += self.vy
             
         
         self.rect.centerx += self.vx
         
         collisions = pygame.sprite.spritecollide(self, self.blocks, False)
         for collision in collisions:
-            self.vx = int(math.sin(self.angulo*-1)*self.speed)*(-1)
-        
+            self.vx *= -1
+            
+        self.rect.centerx += self.vx
+                
         if self.rect.top < 0:
             self.vy *= -1
         if self.rect.bottom  > HEIGHT - 60:
@@ -408,6 +412,8 @@ try:
         
         colisao_1= pygame.sprite.groupcollide(Tanques1, bullets, True , True)
         for collision in colisao_1:
+            vel_ant = player1.speed
+            ang_ant = player1.velocidade_angular
             player1.kill()
             player1 = Tanque('Tank_purple.png', blocks)
             all_sprites.add(player1)
