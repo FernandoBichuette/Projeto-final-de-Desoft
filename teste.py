@@ -117,7 +117,7 @@ def load_assets(img_dir):
 class Tanque(pygame.sprite.Sprite):
     
     # Construtor da classe.
-    def __init__(self, img, blocks):
+    def __init__(self, img, blocks,other_Tanks):
         
         # Construtor da classe pai (Sprite).
         pygame.sprite.Sprite.__init__(self)
@@ -130,7 +130,7 @@ class Tanque(pygame.sprite.Sprite):
         self.image = pygame.transform.scale(img,(30, 27))
         
         self.blocks = blocks
-        
+        self.other_Tanks = other_Tanks
 
         # Deixando transparente.
         self.image.set_colorkey(BLACK)
@@ -151,9 +151,7 @@ class Tanque(pygame.sprite.Sprite):
         self.rect.y = random.randint(0, 500)
         self.radius = 25
         
-        
-       
-        
+               
     def update(self):
         
         self.angulo += self.velocidade_angular
@@ -169,7 +167,7 @@ class Tanque(pygame.sprite.Sprite):
         self.rect.centerx += vx
         
         collisions = pygame.sprite.spritecollide(self, self.blocks, False)
-        
+        collisions +=  pygame.sprite.spritecollide(self, self.other_Tanks, False,pygame.sprite.collide_mask)
         for collision in collisions:
             if self.rect.centerx < collision.rect.centerx:
                 self.rect.right = collision.rect.left
@@ -181,7 +179,7 @@ class Tanque(pygame.sprite.Sprite):
         self.rect.centery += vy
         
         collisions = pygame.sprite.spritecollide(self, self.blocks, False)
-        
+        collisions +=  pygame.sprite.spritecollide(self, self.other_Tanks, False,pygame.sprite.collide_mask)
         for collide in collisions:
             if self.rect.centery < collide.rect.centery:
                 self.rect.bottom = collide.rect.top
@@ -199,7 +197,7 @@ class Tanque(pygame.sprite.Sprite):
         if self.rect.top < 0:
             self.rect.top = 0
                 
-                
+            
                 
 # Classe Bullet que representa os tiros
 class Bullet(pygame.sprite.Sprite):
@@ -232,6 +230,9 @@ class Bullet(pygame.sprite.Sprite):
         self.speed = -4.5
         self.vx = math.sin(angulo)*self.speed
         self.vy = math.cos(angulo)*self.speed
+        
+        
+        
     # Metodo que atualiza a posição da navinha
     def update(self):
         
@@ -239,7 +240,7 @@ class Bullet(pygame.sprite.Sprite):
         
         
         collisions = pygame.sprite.spritecollide(self, self.blocks, False)
-        
+        collisions += pygame.sprite.spritecollide(self, self.blocks, False,pygame.sprite.collide_mask)
         for collision in collisions:
                 self.vy *= -1
         
@@ -249,6 +250,8 @@ class Bullet(pygame.sprite.Sprite):
         self.rect.centerx += self.vx
         
         collisions = pygame.sprite.spritecollide(self, self.blocks, False)
+        collisions += pygame.sprite.spritecollide(self, self.blocks, False,pygame.sprite.collide_mask)
+
         for collision in collisions:
             self.vx *= -1
             
@@ -281,15 +284,17 @@ blocks = pygame.sprite.Group()
 tiles = pygame.sprite.Group()
 
 score_font = assets["score_font"]
+Tanques1 = pygame.sprite.Group()
+Tanques2 = pygame.sprite.Group()
+
         
-player1 = Tanque('Tank_purple.png', blocks)
-player2 = Tanque('Tank_green.png', blocks)
-#bullet = Bullet()
+player1 = Tanque('Tank_purple.png', blocks,Tanques2)
+player2 = Tanque('Tank_green.png', blocks,Tanques1)
+
 # Cria um grupo de todos os sprites e adiciona a nave.
 all_sprites = pygame.sprite.Group()
 bullets = pygame.sprite.Group()
-Tanques1 = pygame.sprite.Group()
-Tanques2 = pygame.sprite.Group()
+
 Tanques1.add(player1)
 Tanques2.add(player2)
 
@@ -367,6 +372,7 @@ try:
                     bullet = Bullet(player1.rect.centerx, player1.rect.centery, player1.angulo1, blocks)
                     bullets.add(bullet)
                     all_sprites.add(bullets)
+                    
                    
                 if event.key == pygame.K_q:
                     bullet = Bullet(player2.rect.centerx, player2.rect.centery, player2.angulo1, blocks)
@@ -406,7 +412,7 @@ try:
             vel_ant = player1.speed
             ang_ant = player1.velocidade_angular
             player1.kill()
-            player1 = Tanque('Tank_purple.png', blocks)
+            player1 = Tanque('Tank_purple.png', blocks,Tanques2)
             all_sprites.add(player1)
             Tanques1.add(player1)
             player1.speed = vel_ant
@@ -418,7 +424,7 @@ try:
             vel2_ant = player2.speed
             ang2_ant = player2.velocidade_angular
             player2.kill()
-            player2 = Tanque('Tank_green.png', blocks)
+            player2 = Tanque('Tank_green.png', blocks,Tanques1)
             all_sprites.add(player2)
             Tanques2.add(player2)
             player2.speed = vel2_ant
