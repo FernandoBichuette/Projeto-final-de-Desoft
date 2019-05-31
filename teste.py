@@ -18,7 +18,7 @@ fnt_dir = path.join(path.dirname(__file__), 'font')
 WIDTH = 600
 HEIGHT = 650
 TILE_SIZE = 25
-FPS = 130
+FPS = 100
 
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
