@@ -228,16 +228,13 @@ class Bullet(pygame.sprite.Sprite):
         self.rect.centery = int(y - math.cos(angulo)* 49)
         self.rect.centerx = int(x - math.sin(angulo)* 49)
         self.speed = -4.5
-<<<<<<< HEAD
         self.vx = int(math.sin(angulo)*self.speed)
         self.vy = int(math.cos(angulo)*self.speed)
-=======
-        self.vx = math.sin(angulo)*self.speed
-        self.vy = math.cos(angulo)*self.speed
+
         
         
         
->>>>>>> 3c55e0300dc4b28b75e11ad38cca08e7b32d6890
+
     # Metodo que atualiza a posição da navinha
     def update(self):
         
@@ -245,33 +242,21 @@ class Bullet(pygame.sprite.Sprite):
         
         
         collisions = pygame.sprite.spritecollide(self, self.blocks, False)
-<<<<<<< HEAD
+
         
         if collisions:
-=======
-        collisions += pygame.sprite.spritecollide(self, self.blocks, False,pygame.sprite.collide_mask)
-        for collision in collisions:
->>>>>>> 3c55e0300dc4b28b75e11ad38cca08e7b32d6890
-                self.vy *= -1
-                self.rect.centery += self.vy
+            self.vy *= -1
+            self.rect.centery += self.vy
             
         
         self.rect.centerx += self.vx
         
         collisions = pygame.sprite.spritecollide(self, self.blocks, False)
-<<<<<<< HEAD
+
         if collisions:
             self.vx *= -1    
             self.rect.centerx += self.vx
-=======
-        collisions += pygame.sprite.spritecollide(self, self.blocks, False,pygame.sprite.collide_mask)
 
-        for collision in collisions:
-            self.vx *= -1
-            
-        self.rect.centerx += self.vx
->>>>>>> 3c55e0300dc4b28b75e11ad38cca08e7b32d6890
-                
         
         # Se o tiro passar do inicio da tela, morre.
         if self.rect.centery < 100:
