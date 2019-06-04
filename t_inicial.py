@@ -11,7 +11,7 @@ def tela_inic(screen):
 
     
     # Carrega o fundo da tela inicial
-    background = pygame.image.load(path.join(img_dir, 'Tank_purple.png')).convert()
+    background = pygame.image.load(path.join(img_dir, 'T_I.png')).convert()
     background_rect = background.get_rect()
 
     running = True
