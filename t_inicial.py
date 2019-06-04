@@ -11,7 +11,7 @@ def tela_inic(screen):
 
     
     # Carrega o fundo da tela inicial
-    background = pygame.image.load(path.join(img_dir, 'T_I.png')).convert()
+    background = pygame.image.load(path.join(img_dir, 'T.png')).convert()
     background_rect = background.get_rect()
 
     running = True
@@ -27,12 +27,12 @@ def tela_inic(screen):
                 running = False
                 
             if event.type == pygame.KEYUP:
-                if event.key == pygame.K_q:
+                if event.key == pygame.K_n:
                     state = QUIT
                     running = False
                     
             if event.type == pygame.KEYUP:
-                if event.key == pygame.K_SPACE:
+                if event.key == pygame.K_b:
                     state = GAME
                     running = False
             
