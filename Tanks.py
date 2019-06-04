@@ -11,6 +11,8 @@ WIDTH = 600
 HEIGHT = 650
 TILE_SIZE = 25
 FPS = 100
+DELAY_TIME = 3000
+
 
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
@@ -28,13 +30,13 @@ MAP = [
     [EMPTY, EMPTY, EMPTY, BLOCK, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, BLOCK, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, BLOCK, BLOCK, BLOCK, EMPTY, EMPTY, EMPTY],
     [EMPTY, EMPTY, EMPTY, BLOCK, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, BLOCK, EMPTY, EMPTY, EMPTY],
     [EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, BLOCK, EMPTY, EMPTY, EMPTY],
-    [EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, BLOCK, BLOCK, BLOCK, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, BLOCK, EMPTY, EMPTY, BLOCK, EMPTY, EMPTY, EMPTY],
-    [EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, BLOCK, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, BLOCK, BLOCK, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY],
+    [EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, BLOCK, BLOCK, BLOCK, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, BLOCK, BLOCK, EMPTY, EMPTY, BLOCK, EMPTY, EMPTY, EMPTY],
+    [EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, BLOCK, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, BLOCK, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY],
     [EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, BLOCK, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY],
     [EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, BLOCK, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY],
-    [EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, BLOCK, BLOCK, BLOCK, BLOCK, EMPTY, BLOCK, BLOCK, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY],
-    [EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, BLOCK, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY],
-    [EMPTY, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, EMPTY, EMPTY, BLOCK, BLOCK, BLOCK, EMPTY, EMPTY, EMPTY, EMPTY, BLOCK, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY],
+    [EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, BLOCK, BLOCK, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY],
+    [EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY],
+    [EMPTY, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, EMPTY, EMPTY, BLOCK, BLOCK, BLOCK, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY],
     [EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, BLOCK, EMPTY, EMPTY, EMPTY, BLOCK, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY],
     [EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, BLOCK, EMPTY, EMPTY, EMPTY, BLOCK, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, BLOCK, EMPTY, EMPTY],
     [EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, BLOCK, EMPTY, EMPTY, EMPTY, BLOCK, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, BLOCK, EMPTY, EMPTY, EMPTY, EMPTY, BLOCK, BLOCK, BLOCK, EMPTY],
@@ -45,7 +47,7 @@ MAP = [
     [EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY],
     [EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY],
     [EMPTY, BLOCK, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, BLOCK, BLOCK, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, BLOCK, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY],
-    [EMPTY, BLOCK, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, BLOCK, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, BLOCK, BLOCK, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY],
+    [EMPTY, BLOCK, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, BLOCK, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, BLOCK, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY],
     [EMPTY, BLOCK, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, BLOCK, BLOCK, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY],
     [EMPTY, BLOCK, EMPTY, EMPTY, BLOCK, BLOCK, BLOCK, BLOCK, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, BLOCK, BLOCK, BLOCK, BLOCK, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY],
     [EMPTY, BLOCK, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, BLOCK, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, BLOCK, BLOCK, BLOCK, BLOCK, BLOCK, EMPTY, EMPTY],
@@ -122,8 +124,8 @@ class Tanque(pygame.sprite.Sprite):
         self.image = pygame.transform.scale(img,(30, 27))
         
         self.blocks = blocks
-        
         self.other_Tanks = other_Tanks
+
         # Deixando transparente.
         self.image.set_colorkey(BLACK)
         
@@ -143,9 +145,7 @@ class Tanque(pygame.sprite.Sprite):
         self.rect.y = random.randint(0, 500)
         self.radius = 25
         
-        
-        self.mask = pygame.mask.from_surface(self.image)
-        
+               
     def update(self):
         
         self.angulo += self.velocidade_angular
@@ -174,7 +174,6 @@ class Tanque(pygame.sprite.Sprite):
         
         collisions = pygame.sprite.spritecollide(self, self.blocks, False)
         collisions +=  pygame.sprite.spritecollide(self, self.other_Tanks, False,pygame.sprite.collide_mask)
-        
         for collide in collisions:
             if self.rect.centery < collide.rect.centery:
                 self.rect.bottom = collide.rect.top
@@ -192,7 +191,7 @@ class Tanque(pygame.sprite.Sprite):
         if self.rect.top < 0:
             self.rect.top = 0
                 
-   
+            
                 
 # Classe Bullet que representa os tiros
 class Bullet(pygame.sprite.Sprite):
@@ -222,9 +221,14 @@ class Bullet(pygame.sprite.Sprite):
         # Coloca no lugar inicial definido em x, y do constutor
         self.rect.centery = int(y - math.cos(angulo)* 49)
         self.rect.centerx = int(x - math.sin(angulo)* 49)
-        self.speed = -10
-        self.vx = math.sin(angulo)*self.speed
-        self.vy = math.cos(angulo)*self.speed
+        self.speed = -4.5
+        self.vx = int(math.sin(angulo)*self.speed)
+        self.vy = int(math.cos(angulo)*self.speed)
+
+        
+        
+        
+
     # Metodo que atualiza a posição da navinha
     def update(self):
         
@@ -232,34 +236,26 @@ class Bullet(pygame.sprite.Sprite):
         
         
         collisions = pygame.sprite.spritecollide(self, self.blocks, False)
-        for collision in collisions:
-                self.vy *= -1
+
         
-        self.rect.centery += self.vy
+        if collisions:
+            self.vy *= -1
+            self.rect.centery += self.vy
             
         
         self.rect.centerx += self.vx
         
         collisions = pygame.sprite.spritecollide(self, self.blocks, False)
-        for collision in collisions:
-            self.vx *= -1
-            
-        self.rect.centerx += self.vx
-                
-        if self.rect.top < 0:
-            self.vy *= -1
-        if self.rect.bottom  > HEIGHT - 60:
-            self.vy *= -1
-            
-        if self.rect.right < 0:
-            self.vx *= -1
-        if self.rect.left  > WIDTH:
-            self.vx *= -1
-        
+
+        if collisions:
+            self.vx *= -1    
+            self.rect.centerx += self.vx
+
         
         # Se o tiro passar do inicio da tela, morre.
-        #if self.rect.bottom < 0:
-         #   self.kill()
+        if self.rect.centery < 100:
+            self.kill()
+        
 
 pygame.init()
 pygame.mixer.init()
@@ -285,15 +281,20 @@ tiles = pygame.sprite.Group()
 score_font = assets["score_font"]
 Tanques1 = pygame.sprite.Group()
 Tanques2 = pygame.sprite.Group()
+
         
 player1 = Tanque('Tank_purple.png', blocks,Tanques2)
 player2 = Tanque('Tank_green.png', blocks,Tanques1)
-#bullet = Bullet()
+
 # Cria um grupo de todos os sprites e adiciona a nave.
 all_sprites = pygame.sprite.Group()
 bullets = pygame.sprite.Group()
+
 Tanques1.add(player1)
 Tanques2.add(player2)
+
+previous_time  = pygame.time.get_ticks()
+previous_time2 = pygame.time.get_ticks()
 
 all_sprites.add(Tanques1,Tanques2)
 
@@ -366,14 +367,23 @@ try:
                     player2.speed += 2.5
                     
                 if event.key == pygame.K_SPACE:
-                    bullet = Bullet(player1.rect.centerx, player1.rect.centery, player1.angulo1, blocks)
-                    bullets.add(bullet)
-                    all_sprites.add(bullets)
-                   
+                    
+                    current_time = pygame.time.get_ticks()
+                    if current_time - previous_time > DELAY_TIME:
+                        bullet = Bullet(player1.rect.centerx, player1.rect.centery, player1.angulo1, blocks)
+                        bullets.add(bullet)
+                        all_sprites.add(bullets)
+                        previous_time = current_time
+                    
+                                        
                 if event.key == pygame.K_q:
-                    bullet = Bullet(player2.rect.centerx, player2.rect.centery, player2.angulo1, blocks)
-                    bullets.add(bullet)
-                    all_sprites.add(bullets)
+                    
+                    current_time= pygame.time.get_ticks()
+                    if current_time - previous_time > DELAY_TIME:
+                        bullet = Bullet(player2.rect.centerx, player2.rect.centery, player2.angulo1, blocks)
+                        bullets.add(bullet)
+                        all_sprites.add(bullets)
+                        previous_time = current_time
                     
             if event.type == pygame.KEYUP:
                 # Dependendo da tecla, altera a velocidade.
@@ -408,27 +418,24 @@ try:
             vel_ant = player1.speed
             ang_ant = player1.velocidade_angular
             player1.kill()
-            player1 = Tanque('Tank_purple.png', blocks)
+            player1 = Tanque('Tank_purple.png', blocks,Tanques2)
             all_sprites.add(player1)
             Tanques1.add(player1)
+            player1.speed = vel_ant
+            player1.velocidade_angular = ang_ant  
             lives_p1 -= 1
             
         colisao_2 = pygame.sprite.groupcollide(Tanques2, bullets, True , True)       
         for collision in colisao_2:
+            vel2_ant = player2.speed
+            ang2_ant = player2.velocidade_angular
             player2.kill()
-            player2 = Tanque('Tank_green.png', blocks)
+            player2 = Tanque('Tank_green.png', blocks,Tanques1)
             all_sprites.add(player2)
             Tanques2.add(player2)
+            player2.speed = vel2_ant
+            player2.velocidade_angular = ang2_ant
             lives_p2 -= 1
-        
-
-        
-        colisao = pygame.sprite.groupcollide(Tanques1, Tanques2, False , pygame.sprite.collide_mask)
-        
-        
-        
-        
-        
         
         all_sprites.update()
         
@@ -460,4 +467,5 @@ try:
 finally:
     
     pygame.quit()
+    
     

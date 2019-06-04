@@ -19,6 +19,8 @@ WIDTH = 600
 HEIGHT = 650
 TILE_SIZE = 25
 FPS = 100
+DELAY_TIME = 3000
+
 
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
@@ -298,6 +300,9 @@ bullets = pygame.sprite.Group()
 Tanques1.add(player1)
 Tanques2.add(player2)
 
+previous_time  = pygame.time.get_ticks()
+previous_time2 = pygame.time.get_ticks()
+
 all_sprites.add(Tanques1,Tanques2)
 
 for row in range(len(MAP)):
@@ -369,15 +374,23 @@ try:
                     player2.speed += 2.5
                     
                 if event.key == pygame.K_SPACE:
-                    bullet = Bullet(player1.rect.centerx, player1.rect.centery, player1.angulo1, blocks)
-                    bullets.add(bullet)
-                    all_sprites.add(bullets)
                     
-                   
+                    current_time = pygame.time.get_ticks()
+                    if current_time - previous_time > DELAY_TIME:
+                        bullet = Bullet(player1.rect.centerx, player1.rect.centery, player1.angulo1, blocks)
+                        bullets.add(bullet)
+                        all_sprites.add(bullets)
+                        previous_time = current_time
+                    
+                                        
                 if event.key == pygame.K_q:
-                    bullet = Bullet(player2.rect.centerx, player2.rect.centery, player2.angulo1, blocks)
-                    bullets.add(bullet)
-                    all_sprites.add(bullets)
+                    
+                    current_time = pygame.time.get_ticks()
+                    if current_time - previous_time > DELAY_TIME:
+                        bullet = Bullet(player2.rect.centerx, player2.rect.centery, player2.angulo1, blocks)
+                        bullets.add(bullet)
+                        all_sprites.add(bullets)
+                        previous_time = current_time
                     
             if event.type == pygame.KEYUP:
                 # Dependendo da tecla, altera a velocidade.
