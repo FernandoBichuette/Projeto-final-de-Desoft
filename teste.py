@@ -399,3 +399,4 @@ def jogo(screen):
         pygame.display.flip()
     return INIT
     
+'''oi meu nome é felipe'''
